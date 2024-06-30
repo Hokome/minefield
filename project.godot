@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Minefield"
+run/main_scene="res://empty.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+network="*res://network.gd"
+room="*res://room.gd"
+game="*res://game.gd"
+menu="*res://ui/menu.tscn"
+hud="*res://ui/hud.tscn"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="Minefield"
+
+[editor]
+
+naming/node_name_casing=2
+
+[physics]
+
+common/physics_ticks_per_second=30
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

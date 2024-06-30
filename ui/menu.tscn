@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfjme3vw55w2n"]
+
+[ext_resource type="Script" path="res://ui/menu.gd" id="1_8irua"]
+[ext_resource type="PackedScene" uid="uid://duqiu0yiuvtwa" path="res://ui/player_status_ui.tscn" id="2_0covr"]
+[ext_resource type="Theme" uid="uid://bdwcrgwy5x0ou" path="res://ui/main_theme.tres" id="3_inwlb"]
+
+[node name="canvas" type="CanvasLayer" node_paths=PackedStringArray("player_list", "room_buttons", "start_button", "ready_button", "connection_menu", "name_field", "ip_field")]
+script = ExtResource("1_8irua")
+player_status_scene = ExtResource("2_0covr")
+player_list = NodePath("margin/frame/player_list")
+room_buttons = NodePath("margin/frame/room_buttons")
+start_button = NodePath("margin/frame/room_buttons/start_game")
+ready_button = NodePath("margin/frame/room_buttons/ready")
+connection_menu = NodePath("center/connection_menu")
+name_field = NodePath("center/connection_menu/name_field")
+ip_field = NodePath("center/connection_menu/ip_field")
+
+[node name="center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="connection_menu" type="VBoxContainer" parent="center"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="name_field" type="LineEdit" parent="center/connection_menu"]
+layout_mode = 2
+theme = ExtResource("3_inwlb")
+placeholder_text = "name"
+alignment = 1
+
+[node name="sep_1" type="HSeparator" parent="center/connection_menu"]
+layout_mode = 2
+theme = ExtResource("3_inwlb")
+
+[node name="host" type="Button" parent="center/connection_menu"]
+layout_mode = 2
+theme = ExtResource("3_inwlb")
+text = "host"
+
+[node name="sep_2" type="HSeparator" parent="center/connection_menu"]
+layout_mode = 2
+theme = ExtResource("3_inwlb")
+
+[node name="ip_field" type="LineEdit" parent="center/connection_menu"]
+layout_mode = 2
+theme = ExtResource("3_inwlb")
+placeholder_text = "ip"
+alignment = 1
+
+[node name="join" type="Button" parent="center/connection_menu"]
+layout_mode = 2
+theme = ExtResource("3_inwlb")
+text = "join"
+
+[node name="margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_inwlb")
+
+[node name="frame" type="Control" parent="margin"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="room_buttons" type="VBoxContainer" parent="margin/frame"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="start_game" type="Button" parent="margin/frame/room_buttons"]
+layout_mode = 2
+disabled = true
+text = "Start"
+alignment = 0
+
+[node name="ready" type="CheckButton" parent="margin/frame/room_buttons"]
+layout_mode = 2
+text = "Ready"
+
+[node name="player_list" type="VBoxContainer" parent="margin/frame"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+alignment = 1
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="center/connection_menu/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="center/connection_menu/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="margin/frame/room_buttons/start_game" to="." method="_on_start_game_pressed"]
+[connection signal="toggled" from="margin/frame/room_buttons/ready" to="." method="_on_ready_toggled"]
